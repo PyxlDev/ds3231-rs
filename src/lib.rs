@@ -154,24 +154,24 @@ impl<S,E> DS3231<S>
 
 	/// Sets the time
 	pub fn set_time(&mut self, time : &DS3231Time) -> Result<(), E>{
-		let secs_val = time.secs%10 + time.secs/10 << 4;
+		let secs_val = time.secs%10 + (time.secs/10 << 4);
 		self.set_reg(DS3231Regs::Seconds, secs_val)?;
 
-		let mins_val = time.mins%10 + time.mins/10 << 4;
+		let mins_val = time.mins%10 + (time.mins/10 << 4);
 		self.set_reg(DS3231Regs::Minutes, mins_val)?;
 
-		let hours_val = time.hours%10 + time.hours/10 << 4;
+		let hours_val = time.hours%10 + (time.hours/10 << 4);
 		self.set_reg(DS3231Regs::Hours, hours_val)?;
 
 		self.set_reg(DS3231Regs::Day, time.wday)?;
 
-		let date_val = time.mday%10 + time.mday/10 << 4;
+		let date_val = time.mday%10 + (time.mday/10 << 4);
 		self.set_reg(DS3231Regs::Date, time.mday)?;
 
-		let months_val = time.month%10 + time.month/10 << 4;
+		let months_val = time.month%10 + (time.month/10 << 4);
 		self.set_reg(DS3231Regs::MonthCentury, time.month)?;
 		
-		let years_val = time.year%10 + time.year/10 << 4;
+		let years_val = time.year%10 + (time.year/10 << 4);
 		self.set_reg(DS3231Regs::Year, time.year)?;
 
 		Ok(())
