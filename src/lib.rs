@@ -166,13 +166,13 @@ impl<S,E> DS3231<S>
 		self.set_reg(DS3231Regs::Day, time.wday)?;
 
 		let date_val = time.mday%10 + (time.mday/10 << 4);
-		self.set_reg(DS3231Regs::Date, time.mday)?;
+		self.set_reg(DS3231Regs::Date, date_val)?;
 
 		let months_val = time.month%10 + (time.month/10 << 4);
-		self.set_reg(DS3231Regs::MonthCentury, time.month)?;
+		self.set_reg(DS3231Regs::MonthCentury, months_val)?;
 		
 		let years_val = time.year%10 + (time.year/10 << 4);
-		self.set_reg(DS3231Regs::Year, time.year)?;
+		self.set_reg(DS3231Regs::Year, years_val)?;
 
 		Ok(())
 	}
